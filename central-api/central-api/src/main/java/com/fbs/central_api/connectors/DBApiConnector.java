@@ -1,5 +1,6 @@
 package com.fbs.central_api.connectors;
 
+import com.fbs.central_api.models.Airline;
 import com.fbs.central_api.models.AppUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,6 +30,18 @@ public class DBApiConnector {
         log.info("Calling DBApi register user endpoint");
         // exchange method is used to send request in parameters we pass i. url, ii. requestMethod, iii. requestBody, iv. responseType
         ResponseEntity<AppUser> response = restTemplate.exchange(url, HttpMethod.POST, request, AppUser.class);
+        log.info("Response: " + response.toString());
+        return response.getBody();
+    }
+
+    public Airline callRegisterAirlineEndpoint(Airline airline){
+        log.info("Inside callRegisterAirlineEndpoint method with payload: " + airline.toString());
+        String url = dbApiBaseUrl + "/airline/register";
+        RequestEntity request = RequestEntity.post(url).body(airline);
+        log.info("Created request: " + request.toString());
+        RestTemplate restTemplate = new RestTemplate();
+        log.info("Calling DBApi register Airline endpoint");
+        ResponseEntity<Airline> response = restTemplate.exchange(url, HttpMethod.POST, request, Airline.class);
         log.info("Response: " + response.toString());
         return response.getBody();
     }
