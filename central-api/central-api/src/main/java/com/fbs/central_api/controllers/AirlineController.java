@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @Slf4j // it used for printing log to identify errors in code
 @RestController
 @RequestMapping("/api/v1/central/airline")
@@ -28,5 +30,11 @@ public class AirlineController {
 
         Airline airline = airlineService.registerAirline(airlineDetails);
         return new ResponseEntity(airline, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/request/accept/{airlineId}")
+    public void acceptAirlineRequest(@PathVariable UUID airlineId){
+        log.info("airlineId: " + airlineId.toString());
+
     }
 }

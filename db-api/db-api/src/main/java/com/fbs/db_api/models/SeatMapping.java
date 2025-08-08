@@ -15,7 +15,7 @@ public class SeatMapping {
     UUID id;
 
     String className;
-    String range;
+    String seat_range;
     int basePrice;
     int windowPrice;
     int totalWindow;
